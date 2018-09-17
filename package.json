@@ -17,10 +17,13 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
     "redux": "^4.0.0",
+    "semantic-ui": "^2.4.0",
+    "semantic-ui-css": "^2.4.0",
     "semantic-ui-react": "^0.82.5"
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "nodemon -w server.js server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
