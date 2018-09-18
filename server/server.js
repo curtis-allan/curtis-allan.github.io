@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 // Storing user cookies
 app.use(
   session({
-    secret: process.en.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET,
 
     resave: false,
 
