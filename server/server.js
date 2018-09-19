@@ -20,7 +20,7 @@ const session = require("express-session");
 const express = require("express");
 const app = express();
 
-const PORT = 5000;
+const PORT = 4000;
 
 // Connect to mongoDB
 mongoose.connect(
@@ -55,46 +55,44 @@ app.use(
 app.use(cors());
 
 setTimeout(() => {
-  // All our endpoints
+  // User endpoints setup
+
+  // Read the user's session data
+  app.get("/api/user-data", userController.readUserData);
+
+  // Add a new item to cart
+  app.post("/api/user-data/cart", userController.addToCart);
+
+  // Remove an item from the cart
+  app.delete("/api/user-data/cart/:id", userController.removeFromCart);
+
+  // When a User logs in
+  app.post("/api/login", userController.login);
+
+  // When a User logs out
+  app.post("/api/logout", userController.logout);
+
+  // Products endpoints setup
+
+  // Read all product data
+  app.get("/api/products", productsController.readAllProducts);
+
+  // Reading a specific product
+  app.get("/api/products/:id", productsController.readProduct);
+
+  // Admin endpoints setup
+
+  // Gets the admin users
+  app.get("/api/users", adminController.getAdminUsers);
+
+  // Admin creates a new product
+  app.post("/api/products", adminController.createProduct);
+
+  // Admin updating a product
+  app.put("/api/products/:id", adminController.updateProduct);
+
+  // Admin deleting a product
+  app.delete("/api/products/:id", adminController.deleteProduct);
 }, 200);
-
-// User endpoints setup
-
-// Read the user's session data
-app.get("/api/user-data", userController.readUserData);
-
-// Add a new item to cart
-app.post("/api/user-data/cart", userController.addToCart);
-
-// Remove an item from the cart
-app.delete("/api/user-data/cart/:id", userController.removeFromCart);
-
-// When a User logs in
-app.post("/api/login", userController.login);
-
-// When a User logs out
-app.post("/api/logout", userController.logout);
-
-// Products endpoints setup
-
-// Read all product data
-app.get("/api/products", productsController.readAllProducts);
-
-// Reading a specific product
-app.get("/api/products/:id", productsController.readProduct);
-
-// Admin endpoints setup
-
-// Gets the admin users
-app.get("/api/users", adminController.getAdminUsers);
-
-// Admin creates a new product
-app.post("/api/products", adminController.createProduct);
-
-// Admin updating a product
-app.put("/api/products/:id", adminController.updateProduct);
-
-// Admin deleting a product
-app.delete("/api/products/:id", adminController.deleteProduct);
 
 app.listen(PORT, () => console.log("Listening on Port: ", PORT));
